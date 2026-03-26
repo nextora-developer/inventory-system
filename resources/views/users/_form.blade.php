@@ -1,75 +1,102 @@
 @csrf
 
-<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-    <div>
-        <label for="name" class="mb-2 block text-sm font-semibold text-slate-700">Full Name</label>
-        <input type="text" name="name" id="name"
-            value="{{ old('name', $user->name ?? '') }}"
-            class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm"
-            placeholder="Enter full name">
-        @error('name')
-            <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
-        @enderror
-    </div>
+<div class="space-y-8">
 
-    <div>
-        <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">Email Address</label>
-        <input type="email" name="email" id="email"
-            value="{{ old('email', $user->email ?? '') }}"
-            class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm"
-            placeholder="Enter email address">
-        @error('email')
-            <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
-        @enderror
-    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
-    <div class="md:col-span-2">
-        <label for="role" class="mb-2 block text-sm font-semibold text-slate-700">Role</label>
-        <select name="role" id="role"
-            class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm">
-            <option value="">Select role</option>
-            @foreach ($roles as $role)
-                <option value="{{ $role }}" {{ old('role', $user->role ?? '') === $role ? 'selected' : '' }}>
-                    {{ ucfirst($role) }}
-                </option>
-            @endforeach
-        </select>
-        @error('role')
-            <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
-        @enderror
-    </div>
+        {{-- Name --}}
+        <div class="group">
+            <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                Full Name
+            </label>
+            <input type="text" name="name"
+                value="{{ old('name', $user->name ?? '') }}"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm transition focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10"
+                placeholder="e.g. John Tan">
+            @error('name')
+                <p class="mt-2 text-xs font-semibold text-rose-600">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div>
-        <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">
-            Password
+        {{-- Email --}}
+        <div class="group">
+            <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                Email Address
+            </label>
+            <input type="email" name="email"
+                value="{{ old('email', $user->email ?? '') }}"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm transition focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10"
+                placeholder="e.g. john@email.com">
+            @error('email')
+                <p class="mt-2 text-xs font-semibold text-rose-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        {{-- Role --}}
+        <div class="group md:col-span-2">
+            <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                Role
+            </label>
+            <select name="role"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                <option value="">Select role</option>
+                @foreach ($roles as $role)
+                    <option value="{{ $role }}"
+                        {{ old('role', $user->role ?? '') === $role ? 'selected' : '' }}>
+                        {{ ucfirst($role) }}
+                    </option>
+                @endforeach
+            </select>
+            @error('role')
+                <p class="mt-2 text-xs font-semibold text-rose-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        {{-- Password --}}
+        <div class="group">
+            <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                Password
+            </label>
+            <input type="password" name="password"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10"
+                placeholder="Enter secure password">
+
             @isset($user)
-                <span class="text-slate-400">(leave blank to keep current password)</span>
+                <p class="mt-1 text-xs text-slate-400">
+                    Leave blank to keep current password
+                </p>
             @endisset
-        </label>
-        <input type="password" name="password" id="password"
-            class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm"
-            placeholder="Enter password">
-        @error('password')
-            <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
-        @enderror
+
+            @error('password')
+                <p class="mt-2 text-xs font-semibold text-rose-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        {{-- Confirm Password --}}
+        <div class="group">
+            <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                Confirm Password
+            </label>
+            <input type="password" name="password_confirmation"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10"
+                placeholder="Repeat password">
+        </div>
+
     </div>
 
-    <div>
-        <label for="password_confirmation" class="mb-2 block text-sm font-semibold text-slate-700">Confirm Password</label>
-        <input type="password" name="password_confirmation" id="password_confirmation"
-            class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm"
-            placeholder="Confirm password">
-    </div>
+    {{-- Actions --}}
+    <div class="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-end">
 
-    <div class="md:col-span-2 flex items-center gap-3 pt-2">
+        <a href="{{ route('users.index') }}"
+            class="order-2 rounded-2xl px-6 py-3 text-sm font-bold text-slate-500 hover:bg-slate-100 sm:order-1">
+            Cancel
+        </a>
+
         <button type="submit"
-            class="inline-flex items-center rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+            class="order-1 inline-flex items-center gap-2 rounded-2xl bg-[#8b5cf6] px-8 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-100 transition hover:bg-[#7c3aed] active:scale-95 sm:order-2">
             {{ $button ?? 'Save User' }}
         </button>
 
-        <a href="{{ route('users.index') }}"
-            class="inline-flex items-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-            Cancel
-        </a>
     </div>
+
 </div>
