@@ -232,13 +232,13 @@
                                     <span
                                         class="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
                                         <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                                        Stock Entry
+                                        Stock In
                                     </span>
                                 @elseif($type === 'out')
                                     <span
                                         class="inline-flex items-center gap-1.5 rounded-md bg-rose-50 px-2.5 py-1 text-xs font-bold text-rose-700 ring-1 ring-inset ring-rose-600/20">
                                         <span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
-                                        Stock Exit
+                                        Stock Out
                                     </span>
                                 @elseif($type === 'adjustment_plus')
                                     <span

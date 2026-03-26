@@ -8,30 +8,34 @@
     {{-- LEFT: FORM --}}
     <div class="xl:col-span-1">
 
-        <div class="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-200/50">
+    <div class="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-200/50">
 
-            {{-- Gradient --}}
-            <div class="h-2 bg-gradient-to-r from-[#8b5cf6] via-[#c084fc] to-indigo-500"></div>
+        {{-- Gradient --}}
+        <div class="h-2 bg-gradient-to-r from-[#8b5cf6] via-[#c084fc] to-indigo-500"></div>
 
-            <div class="p-6">
+        <div class="p-6">
 
-                <div class="mb-8">
-                    <h2 class="text-xl font-black text-slate-900">Stock In Entry</h2>
-                    <p class="mt-1 text-sm text-slate-500">
-                        Record incoming stock from suppliers.
-                    </p>
-                </div>
+            <div class="mb-8">
+                <h2 class="text-xl font-black text-slate-900">Stock In Entry</h2>
+                <p class="mt-1 text-sm text-slate-500">
+                    Record incoming stock from suppliers.
+                </p>
+            </div>
 
-                <form action="{{ route('stock.in.store') }}" method="POST" class="space-y-6">
-                    @csrf
+            <form action="{{ route('stock.in.store') }}" method="POST" class="space-y-6">
+                @csrf
 
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+                    {{-- Row 1 --}}
                     {{-- Product --}}
-                    <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
+                    <div class="group md:col-span-2">
+                        <label
+                            class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-[#8b5cf6]">
                             Product
                         </label>
                         <select name="product_id"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                             <option value="">Select product</option>
                             @foreach ($products as $product)
                                 <option value="{{ $product->id }}"
@@ -42,13 +46,14 @@
                         </select>
                     </div>
 
+                    {{-- Row 2 --}}
                     {{-- Supplier --}}
-                    <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                    <div class="group md:col-span-2">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Supplier
                         </label>
                         <select name="supplier_id"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                             <option value="">Select supplier</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}"
@@ -59,76 +64,81 @@
                         </select>
                     </div>
 
+                    {{-- Row 3 --}}
                     {{-- Quantity --}}
                     <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Quantity
                         </label>
                         <input type="number" name="quantity"
                             value="{{ old('quantity') }}"
                             placeholder="e.g. 50"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                     </div>
 
                     {{-- Unit Cost --}}
                     <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Unit Cost
                         </label>
                         <input type="number" step="0.01" name="unit_cost"
                             value="{{ old('unit_cost') }}"
                             placeholder="e.g. 25.00"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                     </div>
 
+                    {{-- Row 4 --}}
                     {{-- Reference --}}
                     <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Reference No
                         </label>
                         <input type="text" name="reference_no"
                             value="{{ old('reference_no') }}"
                             placeholder="e.g. INV-2026-001"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                     </div>
 
                     {{-- Date --}}
                     <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Transaction Date
                         </label>
                         <input type="date" name="transaction_date"
                             value="{{ old('transaction_date', now()->format('Y-m-d')) }}"
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm">
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">
                     </div>
 
+                    {{-- Row 5 --}}
                     {{-- Remark --}}
-                    <div class="group">
-                        <label class="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+                    <div class="group md:col-span-2">
+                        <label class="mb-2 ml-1 block text-xs font-bold uppercase tracking-widest text-slate-500">
                             Remark
                         </label>
                         <textarea name="remark" rows="4"
                             placeholder="Optional notes..."
-                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">{{ old('remark') }}</textarea>
+                            class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#8b5cf6] focus:bg-white focus:ring-4 focus:ring-[#8b5cf6]/10">{{ old('remark') }}</textarea>
                     </div>
 
-                    {{-- Actions --}}
-                    <button type="submit"
-                        class="w-full rounded-2xl bg-[#8b5cf6] px-5 py-3 text-sm font-bold text-white hover:bg-[#7c3aed]">
-                        Save Stock In
-                    </button>
+                </div>
 
-                </form>
+                {{-- Actions --}}
+                <button type="submit"
+                    class="w-full rounded-2xl bg-[#8b5cf6] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#7c3aed]">
+                    Save Stock In
+                </button>
 
-            </div>
-
-            {{-- Footer --}}
-            <div class="border-t border-slate-100 bg-slate-50 px-6 py-3 text-xs text-slate-400">
-                This will increase product stock and record a transaction log.
-            </div>
+            </form>
 
         </div>
+
+        {{-- Footer --}}
+        <div class="border-t border-slate-100 bg-slate-50 px-6 py-3 text-xs text-slate-400">
+            This will increase product stock and record a transaction log.
+        </div>
+
     </div>
+</div>
 
     {{-- RIGHT: TABLE --}}
     <div class="xl:col-span-2">

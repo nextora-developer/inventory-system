@@ -60,7 +60,8 @@ class ReportController extends Controller
             ->when($request->filled('date_to'), function ($query) use ($request) {
                 $query->whereDate('transaction_date', '<=', $request->date_to);
             })
-            ->latest('transaction_date')
+            ->orderByDesc('transaction_date')
+            ->orderByDesc('id')
             ->paginate(15)
             ->withQueryString();
 
