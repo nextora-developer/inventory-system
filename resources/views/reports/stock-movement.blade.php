@@ -14,7 +14,25 @@
                     <p class="mt-1 text-sm text-slate-500">Monitor all inventory inflow, outflow, and adjustments.</p>
                 </div>
 
+                <div class="flex gap-2">
+
+                    <a href="{{ route('reports.stock-movement.export', request()->query()) }}"
+                        class="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-bold text-white hover:bg-emerald-600 transition shadow-sm">
+
+                        {{-- Icon --}}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+
+                        Export Excel
+                    </a>
+
+                </div>
+
             </div>
+
+
 
             {{-- Filters --}}
             <form method="GET" action="{{ route('reports.stock-movement') }}"
@@ -28,8 +46,10 @@
                         <option value="">All Types</option>
                         <option value="in" {{ request('type') === 'in' ? 'selected' : '' }}>Stock In</option>
                         <option value="out" {{ request('type') === 'out' ? 'selected' : '' }}>Stock Out</option>
-                        <option value="adjustment_plus" {{ request('type') === 'adjustment_plus' ? 'selected' : '' }}>Adjustment +</option>
-                        <option value="adjustment_minus" {{ request('type') === 'adjustment_minus' ? 'selected' : '' }}>Adjustment -</option>
+                        <option value="adjustment_plus" {{ request('type') === 'adjustment_plus' ? 'selected' : '' }}>
+                            Adjustment +</option>
+                        <option value="adjustment_minus" {{ request('type') === 'adjustment_minus' ? 'selected' : '' }}>
+                            Adjustment -</option>
                     </select>
                 </div>
 
@@ -39,8 +59,9 @@
                     <select name="product_id"
                         class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-[#8b5cf6] focus:ring-2 focus:ring-[#8b5cf6]/20">
                         <option value="">All Products</option>
-                        @foreach($products as $product)
-                            <option value="{{ $product->id }}" {{ (string) request('product_id') === (string) $product->id ? 'selected' : '' }}>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->id }}"
+                                {{ (string) request('product_id') === (string) $product->id ? 'selected' : '' }}>
                                 {{ $product->name }}
                             </option>
                         @endforeach
@@ -82,13 +103,20 @@
                 {{-- Head --}}
                 <thead class="bg-slate-50/50">
                     <tr>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Date</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Product</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Type</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Qty</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Supplier</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Reference</th>
-                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">By</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                            Date</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                            Product</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                            Type</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">Qty
+                        </th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                            Supplier</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                            Reference</th>
+                        <th class="px-6 py-4 text-left text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">By
+                        </th>
                     </tr>
                 </thead>
 
@@ -108,7 +136,8 @@
                             {{-- Product --}}
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-[#8b5cf6] transition">
+                                    <div
+                                        class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-[#8b5cf6] transition">
                                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,27 +154,32 @@
 
                             {{-- Type --}}
                             <td class="px-6 py-4">
-                                @if($transaction->type === 'in')
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 ring-1 ring-emerald-600/20">
+                                @if ($transaction->type === 'in')
+                                    <span
+                                        class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 ring-1 ring-emerald-600/20">
                                         Stock In
                                     </span>
                                 @elseif($transaction->type === 'out')
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-[11px] font-bold text-rose-600 ring-1 ring-rose-500/20">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-[11px] font-bold text-rose-600 ring-1 ring-rose-500/20">
                                         Stock Out
                                     </span>
                                 @elseif($transaction->type === 'adjustment_plus')
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold text-blue-600 ring-1 ring-blue-500/20">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold text-blue-600 ring-1 ring-blue-500/20">
                                         Adjustment +
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-600 ring-1 ring-amber-500/20">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-600 ring-1 ring-amber-500/20">
                                         Adjustment -
                                     </span>
                                 @endif
                             </td>
 
                             {{-- Qty --}}
-                            <td class="px-6 py-4 text-sm font-semibold {{ $transaction->type === 'out' ? 'text-rose-600' : 'text-slate-900' }}">
+                            <td
+                                class="px-6 py-4 text-sm font-semibold {{ $transaction->type === 'out' ? 'text-rose-600' : 'text-slate-900' }}">
                                 {{ $transaction->quantity }}
                             </td>
 

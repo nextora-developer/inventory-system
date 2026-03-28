@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\StockTransaction;
+use App\Exports\StockMovementExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -68,5 +70,13 @@ class ReportController extends Controller
         $products = Product::orderBy('name')->get();
 
         return view('reports.stock-movement', compact('transactions', 'products'));
+    }
+
+    public function exportStockMovement(Request $request)
+    {
+        return Excel::download(
+            new StockMovementExport($request->all()),
+            'stock-movement.xlsx'
+        );
     }
 }
