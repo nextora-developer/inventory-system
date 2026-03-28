@@ -1,5 +1,4 @@
-<aside
-    class="hidden md:flex fixed left-0 top-0 h-screen w-72 flex-col bg-[#0b1120] text-slate-400 border-r border-white/5 shadow-2xl z-40">
+<aside class="flex h-screen w-72 flex-col border-r border-white/5 bg-[#0b1120] text-slate-400 shadow-2xl">
     <div class="px-8 py-10">
         <a href="{{ route('dashboard') }}" class="group flex items-center gap-3.5">
             <div class="relative">
