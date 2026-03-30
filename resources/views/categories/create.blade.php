@@ -6,7 +6,7 @@
 <div class="mx-auto max-w-3xl">
     
     {{-- Back Link & Breadcrumb --}}
-    <div class="mb-6 flex items-center justify-between">
+    <div class="mb-6 hidden md:flex items-center justify-between">
         <nav class="flex items-center gap-2 text-sm font-medium">
             <a href="{{ route('categories.index') }}" class="text-slate-500 hover:text-[#8b5cf6] transition-colors">Categories</a>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>

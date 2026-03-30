@@ -21,13 +21,13 @@
 
 @extends('layouts.admin')
 
-@section('page-title', 'Create Category')
+@section('page-title', 'Edit Category')
 
 @section('content')
     <div class="mx-auto max-w-3xl">
 
         {{-- Back Link & Breadcrumb --}}
-        <div class="mb-6 flex items-center justify-between">
+        <div class="mb-6 hidden md:flex items-center justify-between">
             <nav class="flex items-center gap-2 text-sm font-medium">
                 <a href="{{ route('categories.index') }}"
                     class="text-slate-500 hover:text-[#8b5cf6] transition-colors">Categories</a>

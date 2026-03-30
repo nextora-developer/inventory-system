@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\StockTransaction;
 use App\Exports\StockMovementExport;
+use App\Exports\CurrentStockExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
@@ -77,6 +78,14 @@ class ReportController extends Controller
         return Excel::download(
             new StockMovementExport($request->all()),
             'stock-movement.xlsx'
+        );
+    }
+
+    public function exportCurrentStock(Request $request)
+    {
+        return Excel::download(
+            new CurrentStockExport($request->all()),
+            'current-stock-report.xlsx'
         );
     }
 }

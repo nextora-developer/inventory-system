@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports/low-stock', [ReportController::class, 'lowStock'])->name('reports.low-stock');
         Route::get('/reports/stock-movement', [ReportController::class, 'stockMovement'])->name('reports.stock-movement');
         Route::get('/reports/stock-movement/export', [ReportController::class, 'exportStockMovement'])->name('reports.stock-movement.export');
+        Route::get('/reports/current-stock/export', [ReportController::class, 'exportCurrentStock'])->name('reports.current-stock.export');
     });
 
     // ALL STAFF

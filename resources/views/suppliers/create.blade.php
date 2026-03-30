@@ -6,7 +6,7 @@
     <div class="mx-auto max-w-4xl">
 
         {{-- Breadcrumb --}}
-        <div class="mb-6 flex items-center justify-between">
+        <div class="mb-6 hidden md:flex items-center justify-between">
             <nav class="flex items-center gap-2 text-sm font-medium">
                 <a href="{{ route('suppliers.index') }}" class="text-slate-500 transition-colors hover:text-[#8b5cf6]">
                     Suppliers
