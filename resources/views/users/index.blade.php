@@ -281,7 +281,7 @@
         {{-- Pagination --}}
         @if ($users->hasPages())
             <div class="border-t border-slate-100 bg-slate-50/30 px-4 py-4 md:px-6">
-                {{ $users->links() }}
+                <x-pagination :paginator="$users" />
             </div>
         @endif
 

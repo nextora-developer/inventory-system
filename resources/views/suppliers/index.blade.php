@@ -254,7 +254,7 @@
         {{-- Pagination --}}
         @if ($suppliers->hasPages())
             <div class="border-t border-slate-100 bg-slate-50/30 px-4 py-4 md:px-6">
-                {{ $suppliers->links() }}
+                <x-pagination :paginator="$suppliers" />
             </div>
         @endif
 

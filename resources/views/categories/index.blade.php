@@ -253,10 +253,10 @@
             </table>
         </div>
 
-        {{-- Pagination Area --}}
+    
         @if ($categories->hasPages())
             <div class="border-t border-slate-100 bg-slate-50/30 px-4 py-4 md:px-6">
-                {{ $categories->links() }}
+                <x-pagination :paginator="$categories" />
             </div>
         @endif
     </div>
