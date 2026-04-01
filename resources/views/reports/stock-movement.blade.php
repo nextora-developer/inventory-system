@@ -281,9 +281,9 @@
 
                             {{-- Date --}}
                             <td class="px-6 py-4 text-sm text-slate-500">
-                                {{ $transaction->transaction_date?->format('d M, Y') ?? '-' }}
+                                {{ $transaction->created_at?->format('d M, Y') ?? '-' }}
                                 <p class="text-xs text-slate-400">
-                                    {{ $transaction->transaction_date?->format('H:i') ?? '' }}
+                                    {{ $transaction->created_at?->format('H:i') ?? '' }}
                                 </p>
                             </td>
 
